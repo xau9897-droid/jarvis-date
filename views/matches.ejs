@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<div class="matches-container">
+  <h1 class="page-title">Your Matches</h1>
+  <% if (matches.length === 0) { %>
+    <div class="empty-state">
+      <svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      <h2>No matches yet</h2>
+      <p>Keep swiping to find your match!</p>
+      <a href="/swiper" class="btn btn-primary">Start Swiping</a>
+    </div>
+  <% } else { %>
+    <div class="matches-grid">
+      <% matches.forEach(m => { %>
+        <a href="/chat/<%= m.match_id %>" class="match-card">
+          <% if (m.photo) { %>
+            <img src="/<%= m.photo %>" alt="<%= m.name %>" class="match-photo">
+          <% } else { %>
+            <div class="match-photo-placeholder"><%= m.name[0] %></div>
+          <% } %>
+          <div class="match-info">
+            <h3><%= m.name %>, <%= m.age %></h3>
+          </div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+</div>
+<%- include('partials/footer') %>
